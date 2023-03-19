@@ -1,25 +1,47 @@
-import logo from './logo.svg';
-import './App.css';
+import { useState } from 'react'
+import Header from './shared/template/Header.jsx'
+import Footer from './shared/template/Footer.jsx'
+import './App.css'
+import 'bootstrap/dist/css/bootstrap.css'
+import 'bootstrap-icons/font/bootstrap-icons.css'
+import RegisterForm from './component/RegisterForm.jsx'
 
-function App() {
+
+const App = () => {
+
+  const [showAllUser, setShowAllUser] = useState(false)
+  // const [showNoti , setShowNoti] =  useState(false)
+
+  const [currentUser, setCurrentUser] = useState({
+    firstName: '',
+    lastName: '',
+    email: '',
+    password: '',
+    id: null
+  })
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+    <div>
+      <div className="header">
+        <Header />
+      </div>
+      <div className="row">
+        <div className="col-md-4">
+          <RegisterForm
+            setShowAllUser={setShowAllUser}
+            currentUser={currentUser}
+            setCurrentUser={setCurrentUser}
+          />
+          
+        </div>
+        <div className="col-md-8">
+        </div>
 
-export default App;
+      </div>
+      <div className="footer">
+        <Footer />
+      </div>
+    </div>
+  )
+}
+export default App
