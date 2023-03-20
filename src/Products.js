@@ -1,27 +1,16 @@
-import axios from 'axios';
-import React from 'react';
+import React, { useEffect } from 'react';
 
-export class Products extends React.Component{
-    constructor(props){
-        super(props);
-        this.state = {
-            list:[]
-        }
-    }
-getProducts(){
-    axios.get('http://localhost:3001/getproducts').then(data=>{
-        console.log(data);
-        this.setState({
-            list:data.data
-        })
-    })
-}
-render(){
+const Products = () => {
+
+    useEffect(() => {
+        console.log("In UseEffect Products");
+    }, []);
+
     return (
         <div>
-
+            Product
         </div>
-    )
-}
+    );
 }
 
+export default Products;

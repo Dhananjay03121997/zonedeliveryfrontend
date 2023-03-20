@@ -1,39 +1,51 @@
-import react, {useState} from 'react';
+import react, { useState } from 'react';
 import axios from 'axios';
+import { Link, useHistory } from 'react-router-dom';
+import { createBrowserHistory } from 'history';
 
-export const Login = (props) =>{
-    const [email, setEmail] = useState('');
-    const [pass, setPass] = useState('');
-    const handleSubmit = (e) =>{
-        e.preventDefault();
-     axios.post('http://localhost:3001/signin', {
-        email,
-        password:pass
-     }).then((data)=>{
-        console.log(data);
-        if(data.status === 200){
+export const Login = (props) => {
+   // let history = useHistory();
+   let history=createBrowserHistory();
+// history.push("/dashboard",true);
+
+history.push("/dashboard")
+   const [email, setEmail] = useState('');
+   const [pass, setPass] = useState('');
+   const handleSubmit = (e) => {
+      e.preventDefault();
+      axios.post('http://localhost:3001/signin', {
+         email,
+         password: pass
+      }).then((data) => {
+         console.log(data);
+         if (data.status === 200) {
             localStorage.setItem('token', data.data.data.accessToken);
-        }
-        alert('success');
-     }).catch(err=>{
-        alert(`${err.message}`);
+         }
+         alert('success');
+         history.push('/register', true);
+         history.push('/register');
+      }).catch(err => {
+         console.log(err);
+         alert(`${err.message}`);
 
-     })
-    }
-        return (
-            <div className='form-container'>
-            <form className='login-form' onSubmit={handleSubmit}>
-                 <label>
-                    email
-                 </label>
-                    <input value={email} onChange={(e)=>setEmail(e.target.value)} type="email" placeholder="youremail@example.com" id="email" name="email" />
-                <label>
-                    password
-                 </label>
-                    <input value={pass} onChange={(e)=>setPass(e.target.value)} type="password" placeholder="password" id="password" name="password" />
-                <button type='submit'>Log In</button>            
-            </form>
-            <button className='link-btn' onClick={() => props.onFormSwitch('register')}>Don't have account? Register here.</button>
-            </div>
-        )
+      })
+   }
+   return (
+      <div className='form-container'>
+         {/* <form className='login-form' onSubmit={handleSubmit}> */}
+            <label>
+               email
+            </label>
+            <input value={email} onChange={(e) => setEmail(e.target.value)} type="email" placeholder="youremail@example.com" id="email" name="email" />
+            <label>
+               password
+            </label>
+            <input value={pass} onChange={(e) => setPass(e.target.value)} type="password" placeholder="password" id="password" name="password" />
+            <button type='submit' onClick={handleSubmit}>Log In</button>
+         {/* </form> */}
+         <Link to="/home">
+            <button className='link-btn' >Don't have account? Register here.</button>
+         </Link>
+      </div>
+   )
 }
