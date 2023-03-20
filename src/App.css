@@ -38,3 +38,25 @@ button{
   color: white;
   text-decoration: underline;
 }
+
+table {
+  width: 500px;
+  border-width: 1px;
+  border-color: black;
+  border-style: solid;
+  border-radius: 10px;
+}
+
+table tbody tr td {
+  border-right-width: 1px;
+  border-top-width: 1px;
+  border-bottom-width: 0px;
+  border-left-width: 0px;
+  border-style: solid;
+  border-color: black;
+}
+
+button{
+  max-width: 100px !important;
+  max-height: 20px !important;
+}
