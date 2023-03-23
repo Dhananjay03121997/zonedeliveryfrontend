@@ -18,8 +18,7 @@ export const Login = (props) => {
             localStorage.setItem('token', data.data.data.accessToken);
          }
          alert('success');
-         history.push('/register', true);
-         history.push('/register');
+         history.push('/product');
       }).catch(err => {
          alert(`${err.message}`);
 
